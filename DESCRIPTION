@@ -1,0 +1,18 @@
+Package: diaMeasures2
+Type: Package
+Title: Dialektometric measures and classification
+Version: 0.1
+Date: 2015-08-14
+Author: Iker Usobiaga
+Maintainer: Iker Usobiaga <ikeruso@gmail.com>
+Description: Dialektometric measures and classification.
+License: GPL-2
+Imports:
+    data.table
+Depends:
+    stringdist
+LinkingTo: stringdist
+Suggests:
+    testthat
+Encoding: UTF-8
+RoxygenNote: 6.1.1
