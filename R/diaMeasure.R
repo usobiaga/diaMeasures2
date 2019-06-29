@@ -59,11 +59,21 @@ BINARYMETHODS  <- c(
 #' ## The linguistical identities are "gender" and "location" meaning that each line
 #' ## that belongs to the same location  and gender will be grouped. The distance between
 #' ## each gender and each location will be computed
-#' measure <- diaMeasure(dsample, gender + location ~ question, 'answer', 'ird')
+#' measure <- diaMeasure(dsample, gender + location ~ question, 'answer', 'rdi')
+#' print(measure)
 #'
 #' ## if the linguistical identity is only the gender then all the reponses that each gender has
 #' ## given belong to a single group. The distance between genders will be computed.
-#' measure <- diaMeasure(dsample, gender ~ question, 'answer', 'ird')
+#' measure <- diaMeasure(dsample, gender ~ question, 'answer', 'rdi')
+#' print(measure)
+#'
+#' ## locations defining the linguistical identities
+#' measure <- diaMeasure(dsample, location ~ question, 'answer', 'rdi')
+#' print(measure)
+#'
+#' ## measures between the questions instead of the locations
+#' measure <- diaMeasure(dsample, location ~ question, 'answer', 'rdi', variable.dist = TRUE)
+#' print(measure)
 #'
 diaMeasure <- function(data, formula, value.var,
                        measure = c('lv', 'rdi', 'ipd', 'osa', 'lv', 'dl', 'hamming', 'lcs'),
