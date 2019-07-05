@@ -66,7 +66,6 @@ SEXP dia_measure_C(SEXP ql, SEXP measure, SEXP binary, SEXP weight, SEXP q, SEXP
 
 void do_call_measures(double *ans, double *nobs, int binary_index, SEXP qi, int measure, SEXP weight,
 		      SEXP q, SEXP p, SEXP bt, SEXP useBytes, SEXP nthread){
-  Rprintf("in call measure \n");
   switch(measure){
 
   case IPD:
@@ -83,7 +82,6 @@ void do_call_measures(double *ans, double *nobs, int binary_index, SEXP qi, int 
   
 void call_strdist(double *ans, double *nobs, int binary_index, SEXP qi, int measure, SEXP weight, SEXP q,
 		  SEXP p, SEXP bt, SEXP useBytes, SEXP nthread){
-  Rprintf("in call strdist \n");
   SEXP a, b;
   int nl, j, z, jz;
   
@@ -136,15 +134,11 @@ SEXP do_binary(SEXP a, SEXP b, int measure, int binary_index, SEXP weight, SEXP 
   nab = na * nb;
   ij = 0;
 
-  Rprintf("na is %d . nb is %d \n", na, nb);
-  
   PROTECT(a2 = allocVector(STRSXP, nab));
   PROTECT(b2 = allocVector(STRSXP, nab));
   /* Rprintf("IN BINARY \n"); */
   for (i=0; i<na; i++){
     for(j=0; j<nb; j++){
-      Rprintf("ij is %d \n", ij);
-      Rprintf("i is %s . j is %s \n", CHAR(STRING_ELT(a, i)), CHAR(STRING_ELT(b, j))); 
       SET_STRING_ELT(a2, ij, STRING_ELT(a, i));
       SET_STRING_ELT(b2, ij, STRING_ELT(b, j));
       ij++;

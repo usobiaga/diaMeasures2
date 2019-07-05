@@ -101,10 +101,6 @@ test_that('Cover Set correctness', {
 })
 
 context('stringist distances')
-
-
-
-
 ##distances between variables
 
 distancesBetweenForms <- function(set){
@@ -114,7 +110,6 @@ distancesBetweenForms <- function(set){
     resultForms <- matrix(NA, nq, nq, dimnames = list(uniqueQuestions, uniqueQuestions))
 
     for (i in seq_along(uniqueQuestions)){
-        print(i)
         for (j in 1:i){
             
             if (i == j) next
@@ -171,7 +166,3 @@ test_that('distances between forms correctness', {
 
 
 
-## 1, 2 -> 1/2
-## 3, 4 -> (1 + 2 + 6) / 3
-## 5, 6 -> (0 + 1) / 2
-##m <- diaMeasure(set, location ~ question, 'answer', 'rdi', variable.dist = TRUE)

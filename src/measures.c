@@ -34,7 +34,6 @@ SEXP rdi(SEXP a, SEXP b){
 
   for (i = 0; i<n; i++){
     if (STRCMPR(a, i, b, i) != 0) REAL(result)[i] = 1.0;
-    Rprintf("val %d in rdi is: %f \n", i, REAL(result)[i] );
   }
   
   UNPROTECT(1);
@@ -67,8 +66,6 @@ void ipd_q(double *ans, double *nobs, SEXP qi, SEXP weight){
   PROTECT(tax = allocVector(REALSXP, nuans));
   memset(REAL(tax), 0.0, nuans * sizeof(double));
   nqi = length(unlisted);
-  Rprintf("nqi is %d \n", nqi);
-  Rprintf("qi has a length %d \n", length(qi));
   n = 0;
   
   for (i=0; i<nqi; i++){
@@ -82,7 +79,6 @@ void ipd_q(double *ans, double *nobs, SEXP qi, SEXP weight){
     }
   }
 
-  Rprintf("n is %d \n", n);
   ij = 0;
   for (i=0; i<length(qi); i++){
     for (j=0; j<i; j++){
@@ -98,8 +94,6 @@ void ipd_q(double *ans, double *nobs, SEXP qi, SEXP weight){
       
       if (STRCMPR(a, 0, b, 0) != 0){
 	nobs[ij] += 1.0;
-	Rprintf("nobs is %f \n", nobs[ij]);
-	Rprintf("ans is %f \n", ans[ij]);
 	ij++;
 	continue;
       }
@@ -109,22 +103,13 @@ void ipd_q(double *ans, double *nobs, SEXP qi, SEXP weight){
 	  aux = 1.0 - (REAL(tax)[z] - 1.0) / (n*REAL(weight)[0]);
 	  ans[ij] += aux;
 	  nobs[ij] += aux;
-	  Rprintf("nobs is %f \n", nobs[ij]);
-	  Rprintf("ans is %f \n", ans[ij]);
 	  ij++;
 	  break;
 	}
       }
     }
   }
-  
-      
-  /* for(j=0; j<nuans; j++){ */
-  /*   Rprintf("s in %s . value is %f \n", CHAR(STRING_ELT(uans, j)), REAL(tax)[j]); */
-  /* } */
-    
-  Rprintf(" end  \n");
-  /* tabulate */
+
   UNPROTECT(3);
 
 }
@@ -137,10 +122,8 @@ double jaccard(double *dist, int na, int nb){
   aux = 0;
   for (i=0; i<(na*nb); i++)
     if (dist[i] < 10e-7) aux++;
-  
-  /* Rprintf("a is %d, na is %d, nb is %d \n", a, na, nb); */
+
   r = (double)(na + nb - 2.0*aux) / (double)(na + nb - aux);
-  /* Rprintf("r is %f \n", r); */
   return r;
 
 }
@@ -193,14 +176,9 @@ double cover(double *dist, int na, int nb){
 
     if (new == 0) break;
 
-    Rprintf("isel is %d and jsel is %d \n", isel, jsel);
-    Rprintf("cost is %f \n ", cost);
-
     result += dist[isel*nb + jsel];
     INTEGER(ina)[isel] = 1;
     INTEGER(inb)[jsel] = 1;
-
-    Rprintf("value of new: %d \n", new);
     
   }
   
